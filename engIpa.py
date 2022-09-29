@@ -57,9 +57,6 @@ def getIpa(word):
           content = content[content.find("<span class=\\\\\"IPA\\\\\">")+22:content.find("<span class=\\\\\"IPA\\\\\">")+100]
           content = content[:content.find("</span>")]
           eval_res, jsRunnerFile = js2py.run_file("converter.js")
-          #EXAMPLE CODE!!!! WORKING!!!!
-          convert = content[content.find("\\")+1:content.find("\\")+7]
-          jsRunnerFile.run(convert)
           concatenatedString = ""
           backlog = 0
           for x in range(len(content)):
@@ -73,8 +70,6 @@ def getIpa(word):
             else:
               concatenatedString = concatenatedString + content[x]
           return(concatenatedString)
-              
-
         else:
           print('error. not found.')
 
@@ -83,30 +78,19 @@ def run():
   frame = tk.Tk()
   frame.title("TextBox Input")
   frame.geometry('400x200')
-  # Function for getting Input
-  # from textbox and printing it 
-  # at label widget
-    
+
   def printInput():
       inp = inputtxt.get(1.0, "end-1c")
       lbl.config(text = getIpa(inp))
-
+  
   # Text box creation
-  inputtxt = tk.Text(frame,
-                    height = 5,
-                    width = 20)
-    
+  inputtxt = tk.Text(frame, height = 5, width = 20)
   inputtxt.pack()
-    
   # Button creation
-  printButton = tk.Button(frame,
-                          text = "Print", 
-                          command = printInput)
+  printButton = tk.Button(frame, text = "Print", command = printInput)
   printButton.pack()
-    
   # Label Creation
   lbl = tk.Label(frame, text = "")
   lbl.pack()
   frame.mainloop()
-
 run()
