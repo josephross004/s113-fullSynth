@@ -22,9 +22,13 @@ getIpa (string):
 import requests
 import json
 import tkinter as tk
-import subprocess
 import js2py
+import gtts
 from js2py import require
+import os
+import simpleaudio as sa
+
+
 
 def getIpa(word):
   #Get JSON of word input from API
@@ -83,14 +87,23 @@ def run():
       inp = inputtxt.get(1.0, "end-1c")
       lbl.config(text = getIpa(inp))
   
+  def playInput():
+      inp = inputtxt.get(1.0, "end-1c")
+      playerObject = gtts.gTTS(text=inp, lang="en", slow=False)
+      playerObject.save("playback.wav")
+      filename = 'playback.wav'
+      os.system('playback.wav')
+
+
   # Text box creation
   inputtxt = tk.Text(frame, height = 5, width = 20)
   inputtxt.pack()
   # Button creation
   printButton = tk.Button(frame, text = "Print", command = printInput)
   printButton.pack()
+  playButton = tk.Button(frame, text = "Play", command=playInput)
+  playButton.pack()
   # Label Creation
   lbl = tk.Label(frame, text = "")
   lbl.pack()
   frame.mainloop()
-run()
