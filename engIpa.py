@@ -21,7 +21,7 @@ getIpa (string):
 
 import requests
 import json
-import tkinter as tk
+import dearpygui.dearpygui as dpg
 import js2py
 import gtts
 from js2py import require
@@ -79,22 +79,34 @@ def getIpa(word):
 
 def run():
   # Top level window
-  frame = tk.Tk()
-  frame.title("TextBox Input")
-  frame.geometry('400x200')
+  word = ""
 
-  def printInput():
-      inp = inputtxt.get(1.0, "end-1c")
-      lbl.config(text = getIpa(inp))
+  def printInput(sender,data,user_data):
+    word = getIpa(dpg.get_value(user_data[0]))
+    #print(word)
+    dpg.set_value(text, word)
   
-  def playInput():
-      inp = inputtxt.get(1.0, "end-1c")
+  def playInput(sender,data,user_data):
+      inp = dpg.get_value(user_data[0])
       playerObject = gtts.gTTS(text=inp, lang="en", slow=False)
       playerObject.save("playback.wav")
       filename = 'playback.wav'
       os.system('playback.wav')
 
+  with dpg.window(tag="Speller Window"):
+    # When creating items within the scope of the context
+    # manager, they are automatically "parented" by the
+    # container created in the initial call. So, "window"
+    # will be the parent for all of these items.
 
+    inputtxt = dpg.add_input_text(label="Word", hint="Enter a word to translate...")
+    text = dpg.add_text(word)
+    printer = dpg.add_button(label="Print", callback=printInput, user_data=[inputtxt])
+    play = dpg.add_button(label="Play", callback=playInput, user_data=[inputtxt])
+
+  
+
+'''
   # Text box creation
   inputtxt = tk.Text(frame, height = 5, width = 20)
   inputtxt.pack()
@@ -106,4 +118,4 @@ def run():
   # Label Creation
   lbl = tk.Label(frame, text = "")
   lbl.pack()
-  frame.mainloop()
+  frame.mainloop()'''
