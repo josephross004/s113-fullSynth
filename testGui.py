@@ -2,33 +2,26 @@ import dearpygui.dearpygui as dpg
 
 dpg.create_context()
 
-with dpg.font_registry():
-    with dpg.font("C:\\Windows\\Fonts\\Arial\\arial.ttf", 20) as font1:
+with dpg.window(label="Main"):
 
-        # add the default font range
-        dpg.add_font_range_hint(dpg.mvFontRangeHint_Default)
+    with dpg.menu_bar():
+        with dpg.menu(label="Themes"):
+            dpg.add_menu_item(label="Dark")
+            dpg.add_menu_item(label="Light")
+            dpg.add_menu_item(label="Classic")
 
-        # helper to add range of characters
-        #    Options:
-        #        mvFontRangeHint_Japanese
-        #        mvFontRangeHint_Korean
-        #        mvFontRangeHint_Chinese_Full
-        #        mvFontRangeHint_Chinese_Simplified_Common
-        #        mvFontRangeHint_Cyrillic
-        #        mvFontRangeHint_Thai
-        #        mvFontRangeHint_Vietnamese
-        dpg.add_font_range_hint(dpg.mvFontRangeHint_Japanese)
+            with dpg.menu(label="Other Themes"):
+                dpg.add_menu_item(label="Purple")
+                dpg.add_menu_item(label="Gold")
+                dpg.add_menu_item(label="Red")
 
-        # add specific range of glyphs
-        dpg.add_font_range(0x3100, 0x3ff0)
+        with dpg.menu(label="Tools"):
+            dpg.add_menu_item(label="Show Logger")
+            dpg.add_menu_item(label="Show About")
 
-        # add specific glyphs
-        dpg.add_font_chars([0x3105, 0x3107, 0x3108])
-
-        # remap や to %
-        dpg.add_char_remap(0x3084, 0x0025)
-
-dpg.show_font_manager()
+        with dpg.menu(label="Oddities"):
+            dpg.add_button(label="A Button")
+            dpg.add_simple_plot(label="Menu plot", default_value=(0.3, 0.9, 2.5, 8.9), height=80)
 
 dpg.create_viewport(title='Custom Title', width=800, height=600)
 dpg.setup_dearpygui()

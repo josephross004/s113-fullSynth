@@ -36,7 +36,7 @@ from socket import IP_ADD_MEMBERSHIP
 import numpy
 import simpleaudio
 import sys
-import tkinter as tk
+import dearpygui.dearpygui as dpg
 from scipy.signal import resample_poly
 from scipy.io.wavfile import write
 
@@ -1161,62 +1161,36 @@ def playsound(sound_number=0):
                        #CS=0, FGR1=0, BGR1=100, FGZ=1500, BGZ=6000, FNP=250, BNP=100, FNZ=250, BNZ=100, BGR2=200, PF1=0, PF2=0, PF3=0, PF4=0, PF5=0, PF6=0, NF=0):
 def run():
     #t = numpy.arange(len(s.out)) / s.parameters['FS']
-    window=tk.Tk()
-    # add widgets here
-    ee=tk.Button(window, text="i", fg='red', command=lambda: playsound(1))
-    ee.place(x=85, y=100)
-    oo=tk.Button(window, text="u", fg='red', command=lambda: playsound(2))
-    oo.place(x=100, y=100)
-    ʌ=tk.Button(window, text="ʌ", fg='red', command=lambda: playsound(3))
-    ʌ.place(x=120, y=100)
-    æ=tk.Button(window, text="æ", fg='red', command=lambda: playsound(4))
-    æ.place(x=138, y=100)
-    ɛ=tk.Button(window, text="ɛ", fg='red', command=lambda: playsound(5))
-    ɛ.place(x=160, y=100)
-    ɪ=tk.Button(window, text="ɪ", fg='red', command=lambda: playsound(6))
-    ɪ.place(x=180, y=100)
-    ɒ=tk.Button(window, text="ɒ", fg='red', command=lambda: playsound(7))
-    ɒ.place(x=195, y=100)
-    ʊ=tk.Button(window, text="ʊ", fg='red', command=lambda: playsound(8))
-    ʊ.place(x=215, y=100)
-    ə=tk.Button(window, text="ə", fg='red', command=lambda: playsound(9))
-    ə.place(x=65, y=100)
-    n=tk.Button(window, text="n", fg='purple', command=lambda: playsound(10))
-    n.place(x=65, y=150)
-    m=tk.Button(window, text="m", fg='purple', command=lambda: playsound(11))
-    m.place(x=85, y=150)
-    ɛr=tk.Button(window, text="ɛr", fg='orange', command=lambda: playsound(12))
-    ɛr.place(x=110, y=150)
-    ɔ=tk.Button(window, text="ɔ", fg='red', command=lambda: playsound(13))
-    ɔ.place(x=45, y=100)
-    ɑ=tk.Button(window, text="ɑ", fg='red', command=lambda: playsound(14))
-    ɑ.place(x=25, y=100)
-    s=tk.Button(window, text="s", fg='green', command=lambda: playsound(15))
-    s.place(x=25, y=150)
-    o=tk.Button(window, text="o", fg='red', command=lambda: playsound(16))
-    o.place(x=235, y=100)
-    p=tk.Button(window, text="p", fg='blue', command=lambda: playsound(17))
-    p.place(x=100, y=50)
-    ʃ=tk.Button(window, text="ʃ", fg='green', command=lambda: playsound(18))
-    ʃ.place(x=50, y=150)
-    h=tk.Button(window, text="h", fg='blue', command=lambda: playsound(19))
-    h.place(x=150, y=50)
-    g=tk.Button(window, text="g", fg='blue', command=lambda: playsound(20))
-    g.place(x=175, y=50)
-    k=tk.Button(window, text="k", fg='blue', command=lambda: playsound(21))
-    k.place(x=200, y=50)
-    z=tk.Button(window, text="z", fg='black', command=lambda: playsound(22))
-    z.place(x=250, y=50)
-    w=tk.Button(window, text="w", fg='black', command=lambda: playsound(23))
-    w.place(x=275, y=50)
-    f=tk.Button(window, text="f", fg='black', command=lambda: playsound(24))
-    f.place(x=300, y=50)
-    v=tk.Button(window, text="v", fg='black', command=lambda: playsound(25))
-    v.place(x=325, y=50)
-    t=tk.Button(window, text="t", fg='black', command=lambda: playsound(26))
-    t.place(x=350, y=50)
-    window.title('Phonemes')
-    window.geometry("600x600+10+20")
-    window.mainloop()
+    with dpg.window(tag="Synthesizer Window"):
+    # When creating items within the scope of the context
+    # manager, they are automatically "parented" by the
+    # container created in the initial call. So, "window"
+    # will be the parent for all of these items.
 
+        with dpg.menu_bar():
+
+            with dpg.menu(label="Vowels"):
+                a=dpg.add_menu_item(label="i", callback=lambda:playsound(1))
+                b=dpg.add_menu_item(label="u", callback=lambda:playsound(2))
+                c=dpg.add_menu_item(label="ʌ", callback=lambda:playsound(3))
+                d=dpg.add_menu_item(label="æ", callback=lambda:playsound(4))
+                e=dpg.add_menu_item(label="ɛ", callback=lambda:playsound(5))
+                f=dpg.add_menu_item(label="ɪ", callback=lambda:playsound(6))
+                g=dpg.add_menu_item(label="ɒ", callback=lambda:playsound(7))
+                h=dpg.add_menu_item(label="ʊ", callback=lambda:playsound(8))
+                i=dpg.add_menu_item(label="ə", callback=lambda:playsound(9))
+                j=dpg.add_menu_item(label="ɛr", callback=lambda:playsound(12))
+                k=dpg.add_menu_item(label="ɔ", callback=lambda:playsound(13))
+                l=dpg.add_menu_item(label="ɑ", callback=lambda:playsound(14))
+                m=dpg.add_menu_item(label="o", callback=lambda:playsound(16))
+            
+            with dpg.menu(label="Nasals"):
+                dpg.add_menu_item(label="n", callback=lambda:playsound(10))
+                dpg.add_menu_item(label="m", callback=lambda:playsound(11))
+
+            with dpg.menu(label="Fricatives"):
+                dpg.add_menu_item(label="s", callback=lambda:playsound(15))
+                dpg.add_menu_item(label="ʃ", callback=lambda:playsound(18))
+    
+    # add widgets here
     

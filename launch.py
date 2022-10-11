@@ -45,7 +45,7 @@ dpg.bind_item_theme(button3, blue_theme)
 
 
 
-dpg.create_viewport(title='Custom Title', width=1000, height=600)
+dpg.create_viewport(title='Speech Synthesis Suite', width=1000, height=600)
 dpg.setup_dearpygui()
 dpg.show_viewport()
 dpg.set_primary_window("Primary Window", True)
